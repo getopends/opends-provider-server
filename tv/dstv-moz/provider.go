@@ -4,19 +4,19 @@ import (
 	"context"
 	"errors"
 
-	"github.com/getopends/providerd"
+	"github.com/getopends/libprovider"
 )
 
-func New(_ context.Context) (providerd.Provider, error) {
+func New(_ context.Context) (libprovider.Provider, error) {
 	newProvider := &dstvProvider{}
 
-	return &providerd.DefaultProvider{
-		TransactionCreator: providerd.TransactionCreatorFunc(newProvider.CreateTransaction),
+	return &libprovider.DefaultProvider{
+		TransactionCreator: libprovider.TransactionCreatorFunc(newProvider.CreateTransaction),
 	}, nil
 }
 
 type dstvProvider struct{}
 
-func (d dstvProvider) CreateTransaction(ctx context.Context, t *providerd.Transaction) (*providerd.CreateTransactionResult, error) {
+func (d dstvProvider) CreateTransaction(ctx context.Context, t *libprovider.Transaction) (*libprovider.CreateTransactionResult, error) {
 	return nil, errors.ErrUnsupported
 }
